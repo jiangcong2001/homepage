@@ -53,6 +53,16 @@ app.put('/api/content', authMiddleware, (req, res) => {
   res.json({ success: true });
 });
 
+app.put('/api/sync', (req, res) => {
+  const body = req.body;
+  if (body.site) {
+    writeData(body);
+    res.json({ success: true });
+  } else {
+    res.status(400).json({ error: 'invalid data' });
+  }
+});
+
 app.post('/api/login', (req, res) => {
   const { password } = req.body;
   const data = readData();

@@ -266,7 +266,7 @@ Hello I' m <span class="gradientText">
 
 <script>
 // Load dynamic content from API
-fetch('/data.json')
+fetch('/data.json?_=' + Date.now())
   .then(r => r.json())
   .then(function(d) {
     if (d.site) {

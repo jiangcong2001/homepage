@@ -237,14 +237,30 @@ function saveCommit() {
   var dataStr = JSON.stringify(DATA, null, 2);
   var content = btoa(unescape(encodeURIComponent(dataStr)));
   showToast('正在保存...', 'success');
-  return api('PUT', '/repos/' + OWNER + '/' + REPO + '/contents/data.json', {
+
+  var githubSave = api('PUT', '/repos/' + OWNER + '/' + REPO + '/contents/data.json', {
     message: 'chore: update site content from admin panel',
     content: content,
     sha: CURRENT_SHA,
     branch: BRANCH
-  }).then(function(resp) {
-    CURRENT_SHA = resp.content.sha;
-    showToast('保存成功，网站将自动更新', 'success');
+  });
+
+  var localSync = fetch('/api/sync', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: dataStr
+  }).then(function(r) { return r.json(); }).catch(function() { return null; });
+
+  return Promise.all([githubSave, localSync]).then(function(results) {
+    var githubResult = results[0];
+    var localResult = results[1];
+    CURRENT_SHA = githubResult.content.sha;
+    var msg = '保存成功';
+    if (localResult && localResult.success) {
+      msg += '（本地预览已即时更新）';
+    }
+    msg += '，GitHub Pages 将在 1-2 分钟后更新';
+    showToast(msg, 'success');
   }).catch(function(e) {
     showToast('保存失败: ' + e.message, 'error');
   });

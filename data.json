@@ -1,57 +1,53 @@
 {
   "site": {
-    "title": "Zyyo",
-    "description": "整天半吊子和不学无术的坏孩子,梦想成为庄稼地里的读书人.....",
-    "keywords": "zyyo,张扬YO,ZYYO,张扬主页,ZYYO引导页,zhangyang",
+    "title": "Jiangcong",
+    "description": "Jiangcong 的个人主页，全栈开发者，热爱技术与开源。",
+    "keywords": "jiangcong,全栈,开发者,个人主页,博客",
     "favicon": "./static/img/favicon.ico"
   },
   "profile": {
-    "name": "Zyyo",
+    "name": "Jiangcong",
     "avatar": "./static/img/logo.png",
     "avatarBorder": "./static/img/logokuang.png",
     "descriptions": [
       "👦 <span class=\"purpleText\">Full Stack</span> Developer",
-      "📝 The only way to do <span class=\"purpleText textBackground\">great</span> is to <span class=\"purpleText textBackground\">love</span> what you do."
+      "📝 Stay hungry, stay foolish.",
+      "🚀 热爱开源，持续学习"
     ]
   },
   "sidebar": {
-    "location": "China-Henan",
-    "school": "Sias",
-    "tags": ["网瘾", "小学生", "大一", "网页", "linux", "跑者", "前端", "骑行"],
+    "location": "China",
+    "school": "University",
+    "tags": ["全栈", "前端", "后端", "开源", "Linux", "跑步", "骑行", "摄影"],
     "timeline": [
-      {"title": "敬请期待", "date": "2024.1"},
-      {"title": "ICP备案成功", "date": "2023.8"},
-      {"title": "注册域名zyyo.net", "date": "2023.3"},
-      {"title": "出来后洗心革面", "date": "2021.2"},
-      {"title": "...", "date": "..."},
-      {"title": "搭建第一个网站", "date": "2018.1"}
+      {"title": "持续精进中", "date": "2026"},
+      {"title": "成为全栈开发者", "date": "2025"},
+      {"title": "搭建个人主页", "date": "2025"},
+      {"title": "开始学习编程", "date": "2021"},
+      {"title": "进入大学", "date": "2020"}
     ]
   },
   "social": {
-    "github": "https://github.com/ZYYO666",
-    "email": "i@zyyo.net",
+    "github": "https://github.com/jiangcong2001",
+    "email": "jiangcong2001@example.com",
     "wechatQr": "./static/img/wxzsm.jpg",
     "qqQr": "./static/img/qq.jpg"
   },
   "sites": [
-    {"title": "博客", "desc": "记录摆烂日常", "url": "https://blog.zyyo.net", "img": "./static/img/i1.png"},
-    {"title": "云盘", "desc": "存储收集文件", "url": "https://i.zyyo.cc", "img": "./static/img/i2.png"},
-    {"title": "实验室", "desc": "收集有趣html作品", "url": "https://zyyo.cc", "img": "./static/img/i4.png"},
-    {"title": "实验室", "desc": "收集有趣html作品", "url": "https://zyyo.cc", "img": "./static/img/i4.png"}
+    {"title": "GitHub", "desc": "开源项目与代码", "url": "https://github.com/jiangcong2001", "img": "./static/img/i1.png"},
+    {"title": "博客", "desc": "技术文章与思考", "url": "#", "img": "./static/img/i2.png"}
   ],
   "projects": [
-    {"title": "博客", "desc": "记录摆烂日常", "url": "https://blog.zyyo.net", "img": "./static/img/i1.png"},
-    {"title": "云盘", "desc": "存储收集文件", "url": "https://i.zyyo.cc", "img": "./static/img/i2.png"},
-    {"title": "实验室", "desc": "收集有趣html作品", "url": "https://zyyo.cc", "img": "./static/img/i4.png"},
-    {"title": "实验室", "desc": "收集有趣html作品", "url": "https://zyyo.cc", "img": "./static/img/i4.png"}
+    {"title": "个人主页", "desc": "个人网站与导航", "url": "https://jiangcong2001.github.io/homepage/", "img": "./static/img/i4.png"},
+    {"title": "更多项目", "desc": "持续添加中...", "url": "#", "img": "./static/img/i5.png"}
   ],
   "footer": {
-    "text": "Zyyo",
-    "year": "2024",
-    "icp": "豫ICP备2023015852号-1",
+    "text": "Jiangcong",
+    "year": "2026",
+    "icp": "ICP备案号",
     "icpUrl": "https://beian.miit.gov.cn/"
   },
   "admin": {
-    "password": "admin123"
+    "password": "aa123456"
   }
 }

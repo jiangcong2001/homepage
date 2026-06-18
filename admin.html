@@ -3,130 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>后台管理</title>
+  <title>后台管理 - Jiangcong</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f0f2f5;
-      color: #333;
-      min-height: 100vh;
+      background: #f0f2f5; color: #333; min-height: 100vh;
     }
+
     .login-wrap {
       display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     }
     .login-box {
-      background: #fff; padding: 40px; border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15); width: 360px;
+      background: #fff; padding: 44px 40px; border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25); width: 400px; max-width: 90vw;
     }
-    .login-box h1 { font-size: 1.5rem; text-align: center; margin-bottom: 24px; }
+    .login-box h1 { font-size: 1.4rem; text-align: center; margin-bottom: 6px; }
+    .login-box .sub { text-align: center; color: #999; font-size: 0.85rem; margin-bottom: 24px; }
+    .login-box label { font-size: 0.85rem; color: #666; display: block; margin-bottom: 4px; }
     .login-box input {
-      width: 100%; padding: 12px 16px; border: 1px solid #d9d9d9;
-      border-radius: 8px; font-size: 1rem; margin-bottom: 16px; outline: none;
+      width: 100%; padding: 10px 14px; border: 1px solid #d9d9d9;
+      border-radius: 8px; font-size: 0.9rem; margin-bottom: 14px; outline: none;
     }
-    .login-box input:focus { border-color: #667eea; }
+    .login-box input:focus { border-color: #1a1a2e; }
+    .login-box .hint { font-size: 0.78rem; color: #aaa; margin-bottom: 16px; line-height: 1.5; }
+    .login-box .hint a { color: #667eea; }
     .login-box button {
-      width: 100%; padding: 12px; background: #667eea; color: #fff;
-      border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;
+      width: 100%; padding: 12px; background: #1a1a2e; color: #fff;
+      border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; font-weight: 600;
     }
-    .login-box button:hover { background: #5a6fd6; }
-    .login-error { color: #e74c3c; font-size: 0.85rem; margin-top: 8px; text-align: center; }
+    .login-box button:hover { background: #0f3460; }
+    .login-error { color: #e74c3c; font-size: 0.85rem; margin-top: 10px; text-align: center; }
 
     .admin-wrap { display: flex; min-height: 100vh; }
     .sidebar {
-      width: 200px; background: #001529; color: #fff; padding: 20px 0; flex-shrink: 0;
+      width: 210px; background: #1a1a2e; color: #fff; padding: 20px 0; flex-shrink: 0;
+      display: flex; flex-direction: column;
     }
-    .sidebar h2 { padding: 0 20px 24px; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .sidebar h2 { padding: 0 20px 20px; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .sidebar nav { flex: 1; }
     .sidebar nav a {
-      display: block; padding: 12px 20px; color: rgba(255,255,255,0.65);
-      text-decoration: none; font-size: 0.9rem; transition: 0.2s;
+      display: block; padding: 11px 20px; color: rgba(255,255,255,0.55);
+      text-decoration: none; font-size: 0.88rem; transition: 0.2s; border-left: 3px solid transparent;
     }
-    .sidebar nav a:hover, .sidebar nav a.active { color: #fff; background: rgba(255,255,255,0.08); }
-    .main {
-      flex: 1; padding: 24px 32px; overflow-y: auto; max-height: 100vh;
+    .sidebar nav a:hover, .sidebar nav a.active { color: #fff; border-left-color: #667eea; background: rgba(255,255,255,0.04); }
+    .sidebar .logout-btn {
+      margin: 20px; padding: 8px; text-align: center; color: rgba(255,255,255,0.45);
+      cursor: pointer; font-size: 0.82rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px;
     }
-    .main h2 { font-size: 1.3rem; margin-bottom: 20px; }
+    .sidebar .logout-btn:hover { color: #e74c3c; }
+
+    .main { flex: 1; padding: 24px 32px; overflow-y: auto; max-height: 100vh; }
+    .main h2 { font-size: 1.25rem; margin-bottom: 18px; }
     .card {
-      background: #fff; border-radius: 12px; padding: 24px;
-      margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      background: #fff; border-radius: 12px; padding: 22px 24px;
+      margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    .card h3 { font-size: 1rem; margin-bottom: 16px; color: #555; }
-    .form-group { margin-bottom: 14px; }
-    .form-group label {
-      display: block; font-size: 0.85rem; color: #888; margin-bottom: 4px;
-    }
-    .form-group input, .form-group textarea {
+    .card h3 { font-size: 0.95rem; margin-bottom: 14px; color: #555; }
+    .fg { margin-bottom: 12px; }
+    .fg label { display: block; font-size: 0.8rem; color: #888; margin-bottom: 3px; }
+    .fg input, .fg textarea {
       width: 100%; padding: 8px 12px; border: 1px solid #d9d9d9;
-      border-radius: 6px; font-size: 0.9rem; outline: none; font-family: inherit;
+      border-radius: 6px; font-size: 0.88rem; outline: none; font-family: inherit;
     }
-    .form-group textarea { resize: vertical; min-height: 60px; }
-    .form-group input:focus, .form-group textarea:focus { border-color: #667eea; }
-    .form-row { display: flex; gap: 12px; }
-    .form-row .form-group { flex: 1; }
+    .fg textarea { resize: vertical; min-height: 56px; }
+    .fg input:focus, .fg textarea:focus { border-color: #667eea; }
+    .form-row { display: flex; gap: 10px; }
+    .form-row .fg { flex: 1; }
+
     .btn {
-      padding: 8px 20px; border: none; border-radius: 6px; cursor: pointer;
-      font-size: 0.9rem; transition: 0.2s;
+      padding: 7px 18px; border: none; border-radius: 6px; cursor: pointer;
+      font-size: 0.85rem; transition: 0.2s; font-weight: 500;
     }
-    .btn-primary { background: #667eea; color: #fff; }
-    .btn-primary:hover { background: #5a6fd6; }
-    .btn-danger { background: #e74c3c; color: #fff; }
-    .btn-danger:hover { background: #c0392b; }
-    .btn-sm { padding: 4px 12px; font-size: 0.8rem; }
+    .btn-primary { background: #1a1a2e; color: #fff; }
+    .btn-primary:hover { background: #0f3460; }
+    .btn-danger { background: #fff; color: #e74c3c; border: 1px solid #e74c3c; }
+    .btn-danger:hover { background: #e74c3c; color: #fff; }
+    .btn-sm { padding: 3px 10px; font-size: 0.75rem; }
     .btn-outline { background: #fff; color: #667eea; border: 1px solid #667eea; }
     .btn-outline:hover { background: #f0f2ff; }
 
     .list-item {
-      display: flex; align-items: center; gap: 10px; padding: 10px 0;
-      border-bottom: 1px solid #f0f0f0;
+      display: flex; align-items: center; gap: 10px; padding: 9px 0;
+      border-bottom: 1px solid #f5f5f5;
     }
     .list-item:last-child { border-bottom: none; }
-    .list-item span { flex: 1; font-size: 0.9rem; }
-    .list-item-actions { display: flex; gap: 6px; }
-    .add-row { margin-top: 12px; }
-    .add-row input, .add-row textarea {
-      width: 100%; padding: 8px 12px; border: 1px dashed #d9d9d9;
-      border-radius: 6px; font-size: 0.9rem; margin-bottom: 8px; outline: none;
+    .list-item .info { flex: 1; font-size: 0.88rem; }
+    .list-item .info b { font-weight: 600; }
+    .list-item .info small { color: #999; }
+    .add-row { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .add-row input {
+      padding: 6px 10px; border: 1px dashed #d9d9d9;
+      border-radius: 6px; font-size: 0.85rem; outline: none; flex: 1; min-width: 120px;
     }
-    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .add-row input:focus { border-color: #667eea; }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
     .tag-item {
-      background: #f0f2ff; color: #667eea; padding: 4px 12px;
-      border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;
+      background: #f0f2ff; color: #667eea; padding: 3px 10px;
+      border-radius: 16px; font-size: 0.82rem; display: flex; align-items: center; gap: 4px;
     }
-    .tag-item button {
-      background: none; border: none; color: #999; cursor: pointer; font-size: 1rem; line-height: 1;
-    }
+    .tag-item button { background: none; border: none; color: #aaa; cursor: pointer; font-size: 0.9rem; line-height: 1; padding: 0 2px; }
+
     .toast {
       position: fixed; top: 20px; right: 20px; z-index: 9999;
-      padding: 12px 24px; border-radius: 8px; color: #fff; font-size: 0.9rem;
-      opacity: 0; transition: opacity 0.3s;
+      padding: 10px 22px; border-radius: 8px; color: #fff; font-size: 0.85rem;
+      opacity: 0; transition: opacity 0.3s; pointer-events: none;
     }
     .toast.show { opacity: 1; }
     .toast-success { background: #52c41a; }
     .toast-error { background: #e74c3c; }
 
+    .loading { text-align: center; padding: 40px; color: #999; }
+
     @media (max-width: 768px) {
       .sidebar { display: none; }
-      .main { padding: 16px; }
+      .main { padding: 14px; }
     }
+
     .section { display: none; }
     .section.active { display: block; }
+
+    .site-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: #667eea; text-decoration: none; font-size: 0.82rem;
+      margin-top: 8px;
+    }
+    .site-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
 <div id="loginPage" class="login-wrap">
   <div class="login-box">
-    <h1>后台管理</h1>
-    <input type="password" id="loginPwd" placeholder="请输入管理密码" onkeydown="if(event.key==='Enter')doLogin()">
-    <button onclick="doLogin()">登录</button>
+    <h1>网站后台管理</h1>
+    <p class="sub">通过 GitHub API 直接管理网站内容</p>
+    <label>GitHub Personal Access Token</label>
+    <input type="password" id="loginToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+    <p class="hint">
+      需要具备 <b>repo</b> 权限的 token。<br>
+      <a href="https://github.com/settings/tokens/new" target="_blank">点击创建 Token</a>
+      &nbsp;|&nbsp;
+      <a href="https://github.com/settings/tokens" target="_blank">查看已有 Token</a>
+    </p>
+    <button onclick="doLogin()">连接 GitHub</button>
     <div class="login-error" id="loginError"></div>
+    <p style="text-align:center;margin-top:12px;font-size:0.78rem;color:#aaa;">
+      仓库：jiangcong2001/homepage
+    </p>
   </div>
 </div>
 
 <div id="adminPage" class="admin-wrap" style="display:none">
   <div class="sidebar">
-    <h2>管理后台</h2>
+    <h2>Jiangcong 后台</h2>
     <nav>
       <a href="#" class="active" data-section="section-site">网站信息</a>
       <a href="#" data-section="section-profile">个人资料</a>
@@ -135,415 +166,336 @@
       <a href="#" data-section="section-sites">站点链接</a>
       <a href="#" data-section="section-projects">项目链接</a>
       <a href="#" data-section="section-footer">底部信息</a>
-      <a href="#" data-section="section-settings">修改密码</a>
     </nav>
+    <div class="logout-btn" onclick="logout()">退出登录</div>
   </div>
-  <div class="main" id="mainContent"></div>
+  <div class="main" id="mainContent">
+    <div class="loading">正在加载...</div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+var TOKEN = '';
 var DATA = {};
+var CURRENT_SHA = '';
+var OWNER = 'jiangcong2001';
+var REPO = 'homepage';
+var BRANCH = 'main';
 var currentSection = 'site';
-
-function checkAuth() {
-  return fetch('/api/check-auth').then(function(r) { return r.ok; }).catch(function() { return false; });
-}
-
-function doLogin() {
-  var pwd = document.getElementById('loginPwd').value;
-  fetch('/api/login', {
-    method: 'POST', headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({password: pwd})
-  }).then(function(r) {
-    if (r.ok) {
-      document.getElementById('loginPage').style.display = 'none';
-      document.getElementById('adminPage').style.display = 'flex';
-      return loadData();
-    } else {
-      document.getElementById('loginError').textContent = '密码错误';
-    }
-  });
-}
-
-function loadData() {
-  return fetch('/api/content').then(function(r) { return r.json(); }).then(function(d) {
-    DATA = d;
-    renderSection(currentSection);
-  });
-}
-
-function saveData(partial) {
-  return fetch('/api/content', {
-    method: 'PUT', headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(partial)
-  }).then(function(r) {
-    if (r.ok) { showToast('保存成功', 'success'); return loadData(); }
-    else { showToast('保存失败', 'error'); }
-  });
-}
 
 function showToast(msg, type) {
   var t = document.getElementById('toast');
   t.textContent = msg; t.className = 'toast toast-' + type + ' show';
-  setTimeout(function() { t.className = 'toast'; }, 2000);
+  setTimeout(function() { t.className = 'toast'; }, 2500);
 }
 
-function renderSection(name) {
-  currentSection = name;
-  var c = document.getElementById('mainContent');
-  var d = DATA;
-  switch(name) {
-    case 'site':
-      c.innerHTML = '<h2>网站信息</h2>' +
-        card('基本信息', [
-          fg('网站标题', 'site.title', d.site ? d.site.title : ''),
-          fg('网站描述', 'site.description', d.site ? d.site.description : ''),
-          fg('关键词', 'site.keywords', d.site ? d.site.keywords : ''),
-          fg('图标路径', 'site.favicon', d.site ? d.site.favicon : ''),
-        ], 'site');
-      break;
-    case 'profile':
-      c.innerHTML = '<h2>个人资料</h2>' +
-        card('基本信息', [
-          fg('姓名', 'profile.name', d.profile ? d.profile.name : ''),
-          fg('头像路径', 'profile.avatar', d.profile ? d.profile.avatar : ''),
-          fg('头像边框', 'profile.avatarBorder', d.profile ? d.profile.avatarBorder : ''),
-        ], 'profile') +
-        card('描述文本', [
-          {html: arrayEditor('profile.descriptions', d.profile ? d.profile.descriptions : [], '描述')}
-        ], 'profile');
-      break;
-    case 'sidebar':
-      c.innerHTML = '<h2>侧边栏</h2>' +
-        card('基本信息', [
-          fg('位置', 'sidebar.location', d.sidebar ? d.sidebar.location : ''),
-          fg('学校', 'sidebar.school', d.sidebar ? d.sidebar.school : ''),
-        ], 'sidebar') +
-        card('标签', [
-          {html: arrayEditor('sidebar.tags', d.sidebar ? d.sidebar.tags : [], '标签', true)}
-        ], 'sidebar') +
-        card('时间线', [
-          {html: timelineEditor('sidebar.timeline', d.sidebar ? d.sidebar.timeline : [])}
-        ], 'sidebar');
-      break;
-    case 'social':
-      c.innerHTML = '<h2>社交链接</h2>' +
-        card('链接', [
-          fg('GitHub', 'social.github', d.social ? d.social.github : ''),
-          fg('邮箱', 'social.email', d.social ? d.social.email : ''),
-          fg('微信二维码图', 'social.wechatQr', d.social ? d.social.wechatQr : ''),
-          fg('QQ二维码图', 'social.qqQr', d.social ? d.social.qqQr : ''),
-        ], 'social');
-      break;
-    case 'sites':
-      c.innerHTML = '<h2>站点链接</h2>' +
-        card('站点列表', [
-          {html: linkEditor('sites', d.sites || [])}
-        ], 'sites');
-      break;
-    case 'projects':
-      c.innerHTML = '<h2>项目链接</h2>' +
-        card('项目列表', [
-          {html: linkEditor('projects', d.projects || [])}
-        ], 'projects');
-      break;
-    case 'footer':
-      c.innerHTML = '<h2>底部信息</h2>' +
-        card('信息', [
-          fg('文本', 'footer.text', d.footer ? d.footer.text : ''),
-          fg('年份', 'footer.year', d.footer ? d.footer.year : ''),
-          fg('ICP号', 'footer.icp', d.footer ? d.footer.icp : ''),
-          fg('ICP链接', 'footer.icpUrl', d.footer ? d.footer.icpUrl : ''),
-        ], 'footer');
-      break;
-    case 'settings':
-      c.innerHTML = '<h2>修改密码</h2>' +
-        '<div class="card"><h3>修改密码</h3>' +
-        '<div class="form-group"><label>新密码</label><input type="password" id="newPwd" placeholder="至少6位"></div>' +
-        '<button class="btn btn-primary" onclick="changePwd()">修改密码</button></div>';
-      break;
-  }
-  bindSectionNav();
+function api(method, path, body) {
+  var opts = {
+    method: method,
+    headers: { 'Authorization': 'token ' + TOKEN, 'Accept': 'application/vnd.github.v3+json' }
+  };
+  if (body) { opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
+  return fetch('https://api.github.com' + path, opts).then(function(r) {
+    if (!r.ok) {
+      return r.json().then(function(e) { throw new Error(e.message || 'API error ' + r.status); });
+    }
+    if (r.status === 204) return null;
+    return r.json();
+  });
 }
 
-function card(title, fields, sectionKey) {
-  var fieldsHtml = fields.map(function(f) {
-    if (f.html) return f.html;
-    return '<div class="form-group"><label>' + f.label + '</label><input id="field-' + f.key.replace(/\./g, '-') + '" value="' + esc(f.value) + '"></div>';
-  }).join('');
-  return '<div class="card"><h3>' + title + '</h3>' + fieldsHtml +
-    '<button class="btn btn-primary" onclick="saveSection(\'' + sectionKey + '\')" style="margin-top:12px">保存</button></div>';
+function doLogin() {
+  TOKEN = document.getElementById('loginToken').value.trim();
+  if (!TOKEN) { document.getElementById('loginError').textContent = '请输入 Token'; return; }
+  document.getElementById('loginError').textContent = '正在连接...';
+
+  api('GET', '/repos/' + OWNER + '/' + REPO + '/contents/data.json?ref=' + BRANCH)
+    .then(function(resp) {
+      CURRENT_SHA = resp.sha;
+      DATA = JSON.parse(atob(resp.content));
+      localStorage.setItem('hp_token', TOKEN);
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('adminPage').style.display = 'flex';
+      renderSection('site');
+    })
+    .catch(function(e) {
+      document.getElementById('loginError').textContent = '连接失败: ' + e.message;
+    });
 }
 
-function fg(label, key, value) {
-  return {label: label, key: key, value: value || ''};
+function logout() {
+  localStorage.removeItem('hp_token');
+  TOKEN = '';
+  DATA = {};
+  document.getElementById('loginPage').style.display = 'flex';
+  document.getElementById('adminPage').style.display = 'none';
+}
+
+function saveCommit() {
+  var dataStr = JSON.stringify(DATA, null, 2);
+  var content = btoa(unescape(encodeURIComponent(dataStr)));
+  showToast('正在保存...', 'success');
+  return api('PUT', '/repos/' + OWNER + '/' + REPO + '/contents/data.json', {
+    message: 'chore: update site content from admin panel',
+    content: content,
+    sha: CURRENT_SHA,
+    branch: BRANCH
+  }).then(function(resp) {
+    CURRENT_SHA = resp.content.sha;
+    showToast('保存成功，网站将自动更新', 'success');
+  }).catch(function(e) {
+    showToast('保存失败: ' + e.message, 'error');
+  });
 }
 
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-function getFieldVal(key) {
-  var el = document.getElementById('field-' + key.replace(/\./g, '-'));
+function fg(label, key, val) {
+  return '<div class="fg"><label>' + label + '</label><input id="f-' + key.replace(/\./g,'-') + '" value="' + esc(val || '') + '"></div>';
+}
+
+function fga(label, key, val) {
+  return '<div class="fg"><label>' + label + '</label><textarea id="f-' + key.replace(/\./g,'-') + '">' + esc(val || '') + '</textarea></div>';
+}
+
+function getVal(key) {
+  var el = document.getElementById('f-' + key.replace(/\./g, '-'));
   return el ? el.value : '';
 }
 
-function saveSection(sectionKey) {
-  var partial = {};
-  partial[sectionKey] = collectSectionData(sectionKey);
-  saveData(partial);
-}
-
-function collectSectionData(key) {
-  var result = {};
-  switch(key) {
-    case 'site':
-      result.title = getFieldVal('site.title');
-      result.description = getFieldVal('site.description');
-      result.keywords = getFieldVal('site.keywords');
-      result.favicon = getFieldVal('site.favicon');
-      break;
-    case 'profile':
-      result.name = getFieldVal('profile.name');
-      result.avatar = getFieldVal('profile.avatar');
-      result.avatarBorder = getFieldVal('profile.avatarBorder');
-      result.descriptions = collectArray('profile.descriptions');
-      break;
-    case 'sidebar':
-      result.location = getFieldVal('sidebar.location');
-      result.school = getFieldVal('sidebar.school');
-      result.tags = collectArray('sidebar.tags');
-      result.timeline = collectTimeline();
-      break;
-    case 'social':
-      result.github = getFieldVal('social.github');
-      result.email = getFieldVal('social.email');
-      result.wechatQr = getFieldVal('social.wechatQr');
-      result.qqQr = getFieldVal('social.qqQr');
-      break;
-    case 'sites':
-    case 'projects':
-      return collectLinks(key);
-    case 'footer':
-      result.text = getFieldVal('footer.text');
-      result.year = getFieldVal('footer.year');
-      result.icp = getFieldVal('footer.icp');
-      result.icpUrl = getFieldVal('footer.icpUrl');
-      break;
-  }
-  return result;
+function card(title, html, saveKey) {
+  return '<div class="card"><h3>' + title + '</h3>' + html +
+    '<button class="btn btn-primary" onclick="saveSection(\'' + saveKey + '\')" style="margin-top:14px">保存并发布</button></div>';
 }
 
 function arrayEditor(key, items, placeholder, simple) {
   var id = key.replace(/\./g, '-');
-  return '<div id="arr-' + id + '">' +
-    (simple ? '<div class="tag-list" id="tags-' + id + '">' + items.map(function(t, i) {
-      return '<span class="tag-item">' + esc(t) + '<button onclick="removeArrayItem(\'' + id + '\',' + i + ')">&times;</button></span>';
-    }).join('') + '</div>' : '') +
-    (simple ? '<input id="new-' + id + '" placeholder="添加' + placeholder + '" onkeydown="if(event.key===\'Enter\')addArrayItem(\'' + id + '\',true)" style="width:100%;padding:8px 12px;border:1px dashed #d9d9d9;border-radius:6px;font-size:0.9rem;outline:none">' :
-    '<div id="items-' + id + '">' + items.map(function(t, i) {
-      return '<div class="list-item"><span>' + esc(t) + '</span><div class="list-item-actions"><button class="btn btn-danger btn-sm" onclick="removeArrayItem(\'' + id + '\',' + i + ')">删除</button></div></div>';
-    }).join('') + '</div><div class="add-row"><input id="new-' + id + '" placeholder="添加' + placeholder + '" onkeydown="if(event.key===\'Enter\')addArrayItem(\'' + id + '\',false)"></div>') +
-    '</div>';
-}
-
-function addArrayItem(id, simple) {
-  var input = document.getElementById('new-' + id);
-  if (!input || !input.value.trim()) return;
   if (simple) {
-    var container = document.getElementById('tags-' + id);
-    var i = container.children.length;
-    var span = document.createElement('span');
-    span.className = 'tag-item';
-    span.innerHTML = esc(input.value.trim()) + '<button onclick="removeArrayItem(\'' + id + '\',' + i + ')">&times;</button>';
-    container.appendChild(span);
-  } else {
-    var container = document.getElementById('items-' + id);
-    var i = container.children.length;
-    var div = document.createElement('div');
-    div.className = 'list-item';
-    div.innerHTML = '<span>' + esc(input.value.trim()) + '</span><div class="list-item-actions"><button class="btn btn-danger btn-sm" onclick="removeArrayItem(\'' + id + '\',' + i + ')">删除</button></div>';
-    container.appendChild(div);
+    var tagsHtml = items.map(function(t, i) {
+      return '<span class="tag-item">' + esc(t) + '<button onclick="removeArr(\'' + key + '\',' + i + ')">&times;</button></span>';
+    }).join('');
+    return '<div class="tag-list" id="tags-' + id + '">' + tagsHtml + '</div>' +
+      '<div class="add-row"><input id="new-' + id + '" placeholder="添加' + placeholder + '" onkeydown="if(event.key===\'Enter\')addArr(\'' + key + '\',true)"><button class="btn btn-outline btn-sm" onclick="addArr(\'' + key + '\',true)">添加</button></div>';
   }
-  input.value = '';
+  var itemsHtml = items.map(function(t, i) {
+    return '<div class="list-item"><span class="info">' + esc(t) + '</span><button class="btn btn-danger btn-sm" onclick="removeArr(\'' + key + '\',' + i + ')">删除</button></div>';
+  }).join('');
+  return '<div id="items-' + id + '">' + itemsHtml + '</div>' +
+    '<div class="add-row"><input id="new-' + id + '" placeholder="添加' + placeholder + '"><button class="btn btn-outline btn-sm" onclick="addArr(\'' + key + '\',false)">添加</button></div>';
 }
 
-function removeArrayItem(id, index) {
-  var simple = !!document.getElementById('tags-' + id);
-  if (simple) {
-    var container = document.getElementById('tags-' + id);
-    if (container.children[index]) container.children[index].remove();
-  } else {
-    var container = document.getElementById('items-' + id);
-    if (container.children[index]) container.children[index].remove();
-  }
-}
-
-function collectArray(key) {
+function addArr(key, simple) {
   var id = key.replace(/\./g, '-');
-  var simple = !!document.getElementById('tags-' + id);
-  if (simple) {
-    var tags = document.getElementById('tags-' + id);
-    var result = [];
-    for (var i = 0; i < tags.children.length; i++) {
-      result.push(tags.children[i].textContent.replace(/×$/, '').trim());
-    }
-    return result;
-  } else {
-    var items = document.getElementById('items-' + id);
-    var result = [];
-    for (var i = 0; i < items.children.length; i++) {
-      result.push(items.children[i].querySelector('span').textContent.trim());
-    }
-    return result;
-  }
+  var input = document.getElementById('new-' + id);
+  if (!input.value.trim()) return;
+  var path = key.split('.');
+  var arr = DATA;
+  for (var i = 0; i < path.length; i++) { arr = arr[path[i]]; }
+  arr.push(input.value.trim());
+  input.value = '';
+  renderCurrent();
+}
+
+function removeArr(key, index) {
+  var path = key.split('.');
+  var arr = DATA;
+  for (var i = 0; i < path.length; i++) { arr = arr[path[i]]; }
+  arr.splice(index, 1);
+  renderCurrent();
 }
 
 function timelineEditor(key, items) {
   var id = key.replace(/\./g, '-');
   var html = '<div id="items-' + id + '">';
   items.forEach(function(item, i) {
-    html += '<div class="list-item">' +
-      '<span><b>' + esc(item.title) + '</b> <small style="color:#999">' + esc(item.date) + '</small></span>' +
-      '<div class="list-item-actions"><button class="btn btn-danger btn-sm" onclick="removeTimelineItem(\'' + id + '\',' + i + ')">删除</button></div>' +
-      '</div>';
+    html += '<div class="list-item"><span class="info"><b>' + esc(item.title) + '</b> <small>' + esc(item.date) + '</small></span>' +
+      '<button class="btn btn-danger btn-sm" onclick="removeTimeline(\'' + id + '\',' + i + ')">删除</button></div>';
   });
   html += '</div>' +
-    '<div class="add-row" style="display:flex;gap:12px">' +
+    '<div class="add-row">' +
     '<input id="new-' + id + '-title" placeholder="事件标题" style="flex:2"><input id="new-' + id + '-date" placeholder="日期" style="flex:1">' +
-    '</div>' +
-    '<button class="btn btn-outline btn-sm" onclick="addTimelineItem(\'' + id + '\')" style="margin-top:8px">添加事件</button>';
+    '<button class="btn btn-outline btn-sm" onclick="addTimeline(\'' + id + '\')">添加</button></div>';
   return html;
 }
 
-function addTimelineItem(id) {
-  var titleEl = document.getElementById('new-' + id + '-title');
-  var dateEl = document.getElementById('new-' + id + '-date');
-  if (!titleEl.value.trim()) return;
-  var container = document.getElementById('items-' + id);
-  var i = container.children.length;
-  var div = document.createElement('div');
-  div.className = 'list-item';
-  div.innerHTML = '<span><b>' + esc(titleEl.value.trim()) + '</b> <small style="color:#999">' + esc(dateEl.value.trim()) + '</small></span>' +
-    '<div class="list-item-actions"><button class="btn btn-danger btn-sm" onclick="removeTimelineItem(\'' + id + '\',' + i + ')">删除</button></div>';
-  container.appendChild(div);
-  titleEl.value = '';
-  dateEl.value = '';
+function addTimeline(id) {
+  var title = document.getElementById('new-' + id + '-title').value.trim();
+  var date = document.getElementById('new-' + id + '-date').value.trim();
+  if (!title) return;
+  DATA.sidebar.timeline.push({title: title, date: date});
+  renderCurrent();
 }
 
-function removeTimelineItem(id, index) {
-  var container = document.getElementById('items-' + id);
-  if (container.children[index]) container.children[index].remove();
-}
-
-function collectTimeline() {
-  var container = document.getElementById('items-sidebar-timeline');
-  var result = [];
-  for (var i = 0; i < container.children.length; i++) {
-    var spans = container.children[i].querySelectorAll('span b, span small');
-    if (spans.length >= 2) {
-      result.push({title: spans[0].textContent.trim(), date: spans[1].textContent.trim()});
-    }
-  }
-  return result;
+function removeTimeline(id, index) {
+  DATA.sidebar.timeline.splice(index, 1);
+  renderCurrent();
 }
 
 function linkEditor(key, items) {
   var id = key;
   var html = '<div id="items-' + id + '">';
   items.forEach(function(item, i) {
-    html += '<div class="list-item">' +
-      '<span><b>' + esc(item.title) + '</b> - ' + esc(item.desc) + ' <small style="color:#667eea">' + esc(item.url) + '</small></span>' +
-      '<div class="list-item-actions"><button class="btn btn-danger btn-sm" onclick="removeLinkItem(\'' + id + '\',' + i + ')">删除</button></div>' +
-      '</div>';
+    html += '<div class="list-item"><span class="info"><b>' + esc(item.title) + '</b> - ' + esc(item.desc) + ' <small style="color:#667eea">' + esc(item.url) + '</small></span>' +
+      '<button class="btn btn-danger btn-sm" onclick="removeLink(\'' + id + '\',' + i + ')">删除</button></div>';
   });
   html += '</div>' +
     '<div class="add-row">' +
-    '<div class="form-row">' +
-    '<div class="form-group"><label>标题</label><input id="new-' + id + '-title"></div>' +
-    '<div class="form-group"><label>描述</label><input id="new-' + id + '-desc"></div>' +
-    '</div>' +
-    '<div class="form-row">' +
-    '<div class="form-group"><label>链接</label><input id="new-' + id + '-url"></div>' +
-    '<div class="form-group"><label>图片</label><input id="new-' + id + '-img"></div>' +
-    '</div>' +
-    '<button class="btn btn-outline btn-sm" onclick="addLinkItem(\'' + id + '\')">添加链接</button>' +
-    '</div>';
+    '<input id="new-' + id + '-title" placeholder="标题"><input id="new-' + id + '-desc" placeholder="描述"><input id="new-' + id + '-url" placeholder="链接"><input id="new-' + id + '-img" placeholder="图片路径">' +
+    '<button class="btn btn-outline btn-sm" onclick="addLink(\'' + id + '\')">添加</button></div>';
   return html;
 }
 
-function addLinkItem(id) {
-  var title = document.getElementById('new-' + id + '-title').value.trim();
-  var desc = document.getElementById('new-' + id + '-desc').value.trim();
-  var url = document.getElementById('new-' + id + '-url').value.trim();
-  var img = document.getElementById('new-' + id + '-img').value.trim();
+function addLink(key) {
+  var title = document.getElementById('new-' + key + '-title').value.trim();
+  var desc = document.getElementById('new-' + key + '-desc').value.trim();
+  var url = document.getElementById('new-' + key + '-url').value.trim();
+  var img = document.getElementById('new-' + key + '-img').value.trim();
   if (!title) return;
-  var container = document.getElementById('items-' + id);
-  var i = container.children.length;
-  var div = document.createElement('div');
-  div.className = 'list-item';
-  div.innerHTML = '<span><b>' + esc(title) + '</b> - ' + esc(desc) + ' <small style="color:#667eea">' + esc(url) + '</small></span>' +
-    '<div class="list-item-actions"><button class="btn btn-danger btn-sm" onclick="removeLinkItem(\'' + id + '\',' + i + ')">删除</button></div>';
-  container.appendChild(div);
-  ['title','desc','url','img'].forEach(function(f) {
-    document.getElementById('new-' + id + '-' + f).value = '';
-  });
+  DATA[key].push({title: title, desc: desc, url: url, img: img || './static/img/i1.png'});
+  renderCurrent();
 }
 
-function removeLinkItem(id, index) {
-  var container = document.getElementById('items-' + id);
-  if (container.children[index]) container.children[index].remove();
+function removeLink(key, index) {
+  DATA[key].splice(index, 1);
+  renderCurrent();
 }
 
-function collectLinks(key) {
-  var container = document.getElementById('items-' + key);
-  var result = [];
-  for (var i = 0; i < container.children.length; i++) {
-    var html = container.children[i].querySelector('span').innerHTML;
-    var titleMatch = html.match(/<b>(.*?)<\/b>/);
-    var smallMatch = html.match(/<small.*?>(.*?)<\/small>/);
-    var descMatch = html.match(/<\/b> - (.*?) <small/);
-    result.push({
-      title: titleMatch ? titleMatch[1] : '',
-      desc: descMatch ? descMatch[1] : '',
-      url: smallMatch ? smallMatch[1] : '',
-      img: DATA[key] && DATA[key][i] ? DATA[key][i].img : './static/img/i1.png'
-    });
+function renderCurrent() {
+  renderSection(currentSection);
+}
+
+function renderSection(name) {
+  currentSection = name;
+  var c = document.getElementById('mainContent');
+  var d = DATA;
+
+  switch(name) {
+    case 'site':
+      c.innerHTML = '<h2>网站信息</h2>' +
+        card('SEO 设置',
+          fg('网站标题', 'site.title', d.site.title) +
+          fga('网站描述', 'site.description', d.site.description) +
+          fg('关键词', 'site.keywords', d.site.keywords) +
+          fg('图标路径', 'site.favicon', d.site.favicon),
+        'site');
+      break;
+    case 'profile':
+      c.innerHTML = '<h2>个人资料</h2>' +
+        card('基本信息',
+          fg('显示名称', 'profile.name', d.profile.name) +
+          fg('头像路径', 'profile.avatar', d.profile.avatar) +
+          fg('头像边框图', 'profile.avatarBorder', d.profile.avatarBorder),
+        'profile') +
+        card('个人描述',
+          arrayEditor('profile.descriptions', d.profile.descriptions, '描述文本', false),
+        'profile');
+      break;
+    case 'sidebar':
+      c.innerHTML = '<h2>侧边栏</h2>' +
+        card('基本信息',
+          fg('位置', 'sidebar.location', d.sidebar.location) +
+          fg('学校/组织', 'sidebar.school', d.sidebar.school),
+        'sidebar') +
+        card('标签',
+          arrayEditor('sidebar.tags', d.sidebar.tags, '标签', true),
+        'sidebar') +
+        card('时间线',
+          timelineEditor('sidebar.timeline', d.sidebar.timeline),
+        'sidebar');
+      break;
+    case 'social':
+      c.innerHTML = '<h2>社交链接</h2>' +
+        card('链接设置',
+          fg('GitHub 地址', 'social.github', d.social.github) +
+          fg('邮箱', 'social.email', d.social.email) +
+          fg('微信二维码图片', 'social.wechatQr', d.social.wechatQr) +
+          fg('QQ二维码图片', 'social.qqQr', d.social.qqQr),
+        'social');
+      break;
+    case 'sites':
+      c.innerHTML = '<h2>站点链接</h2>' +
+        card('站点列表（首页 Site 区域）',
+          linkEditor('sites', d.sites),
+        'sites');
+      break;
+    case 'projects':
+      c.innerHTML = '<h2>项目链接</h2>' +
+        card('项目列表（首页 Project 区域）',
+          linkEditor('projects', d.projects),
+        'projects');
+      break;
+    case 'footer':
+      c.innerHTML = '<h2>底部信息</h2>' +
+        card('版权设置',
+          fg('版权文本', 'footer.text', d.footer.text) +
+          fg('年份', 'footer.year', d.footer.year) +
+          fg('ICP备案号', 'footer.icp', d.footer.icp) +
+          fg('ICP链接', 'footer.icpUrl', d.footer.icpUrl),
+        'footer');
+      break;
   }
-  return result;
+  bindNav();
 }
 
-function changePwd() {
-  var pwd = document.getElementById('newPwd').value;
-  if (pwd.length < 6) { showToast('密码至少6位', 'error'); return; }
-  fetch('/api/change-password', {
-    method: 'POST', headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({newPassword: pwd})
-  }).then(function(r) {
-    if (r.ok) { showToast('密码修改成功', 'success'); document.getElementById('newPwd').value = ''; }
-    else { showToast('修改失败', 'error'); }
-  });
+function saveSection(key) {
+  var d = DATA;
+  switch(key) {
+    case 'site':
+      d.site.title = getVal('site.title');
+      d.site.description = getVal('site.description');
+      d.site.keywords = getVal('site.keywords');
+      d.site.favicon = getVal('site.favicon');
+      break;
+    case 'profile':
+      d.profile.name = getVal('profile.name');
+      d.profile.avatar = getVal('profile.avatar');
+      d.profile.avatarBorder = getVal('profile.avatarBorder');
+      break;
+    case 'sidebar':
+      d.sidebar.location = getVal('sidebar.location');
+      d.sidebar.school = getVal('sidebar.school');
+      break;
+    case 'social':
+      d.social.github = getVal('social.github');
+      d.social.email = getVal('social.email');
+      d.social.wechatQr = getVal('social.wechatQr');
+      d.social.qqQr = getVal('social.qqQr');
+      break;
+    case 'sites':
+    case 'projects':
+      break;
+    case 'footer':
+      d.footer.text = getVal('footer.text');
+      d.footer.year = getVal('footer.year');
+      d.footer.icp = getVal('footer.icp');
+      d.footer.icpUrl = getVal('footer.icpUrl');
+      break;
+  }
+  saveCommit();
 }
 
-function bindSectionNav() {
+function bindNav() {
   document.querySelectorAll('.sidebar nav a').forEach(function(a) {
     a.classList.remove('active');
     if (a.dataset.section === 'section-' + currentSection) a.classList.add('active');
     a.onclick = function(e) {
       e.preventDefault();
-      currentSection = this.dataset.section.replace('section-', '');
-      loadData().then(function() { renderSection(currentSection); });
+      renderSection(this.dataset.section.replace('section-', ''));
     };
   });
 }
 
-checkAuth().then(function(ok) {
-  if (ok) {
-    document.getElementById('loginPage').style.display = 'none';
-    document.getElementById('adminPage').style.display = 'flex';
-    loadData().then(function() { renderSection('site'); });
+(function() {
+  var saved = localStorage.getItem('hp_token');
+  if (saved) {
+    TOKEN = saved;
+    document.getElementById('loginToken').value = saved;
+    doLogin();
   }
-});
+})();
 </script>
+
 </body>
 </html>

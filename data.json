@@ -1,0 +1,57 @@
+{
+  "site": {
+    "title": "Zyyo",
+    "description": "整天半吊子和不学无术的坏孩子,梦想成为庄稼地里的读书人.....",
+    "keywords": "zyyo,张扬YO,ZYYO,张扬主页,ZYYO引导页,zhangyang",
+    "favicon": "./static/img/favicon.ico"
+  },
+  "profile": {
+    "name": "Zyyo",
+    "avatar": "./static/img/logo.png",
+    "avatarBorder": "./static/img/logokuang.png",
+    "descriptions": [
+      "👦 <span class=\"purpleText\">Full Stack</span> Developer",
+      "📝 The only way to do <span class=\"purpleText textBackground\">great</span> is to <span class=\"purpleText textBackground\">love</span> what you do."
+    ]
+  },
+  "sidebar": {
+    "location": "China-Henan",
+    "school": "Sias",
+    "tags": ["网瘾", "小学生", "大一", "网页", "linux", "跑者", "前端", "骑行"],
+    "timeline": [
+      {"title": "敬请期待", "date": "2024.1"},
+      {"title": "ICP备案成功", "date": "2023.8"},
+      {"title": "注册域名zyyo.net", "date": "2023.3"},
+      {"title": "出来后洗心革面", "date": "2021.2"},
+      {"title": "...", "date": "..."},
+      {"title": "搭建第一个网站", "date": "2018.1"}
+    ]
+  },
+  "social": {
+    "github": "https://github.com/ZYYO666",
+    "email": "i@zyyo.net",
+    "wechatQr": "./static/img/wxzsm.jpg",
+    "qqQr": "./static/img/qq.jpg"
+  },
+  "sites": [
+    {"title": "博客", "desc": "记录摆烂日常", "url": "https://blog.zyyo.net", "img": "./static/img/i1.png"},
+    {"title": "云盘", "desc": "存储收集文件", "url": "https://i.zyyo.cc", "img": "./static/img/i2.png"},
+    {"title": "实验室", "desc": "收集有趣html作品", "url": "https://zyyo.cc", "img": "./static/img/i4.png"},
+    {"title": "实验室", "desc": "收集有趣html作品", "url": "https://zyyo.cc", "img": "./static/img/i4.png"}
+  ],
+  "projects": [
+    {"title": "博客", "desc": "记录摆烂日常", "url": "https://blog.zyyo.net", "img": "./static/img/i1.png"},
+    {"title": "云盘", "desc": "存储收集文件", "url": "https://i.zyyo.cc", "img": "./static/img/i2.png"},
+    {"title": "实验室", "desc": "收集有趣html作品", "url": "https://zyyo.cc", "img": "./static/img/i4.png"},
+    {"title": "实验室", "desc": "收集有趣html作品", "url": "https://zyyo.cc", "img": "./static/img/i4.png"}
+  ],
+  "footer": {
+    "text": "Zyyo",
+    "year": "2024",
+    "icp": "豫ICP备2023015852号-1",
+    "icpUrl": "https://beian.miit.gov.cn/"
+  },
+  "admin": {
+    "password": "admin123"
+  }
+}

@@ -1,8 +1,8 @@
 {
   "site": {
     "title": "Jiangcong",
-    "description": "Jiangcong 的个人主页，全栈开发者，热爱技术与开源。",
-    "keywords": "jiangcong,全栈,开发者,个人主页,博客",
+    "description": "Jiangcong çä¸ªäººä¸»é¡µï¼å¨æ å¼åèï¼ç­ç±ææ¯ä¸å¼æºã",
+    "keywords": "jiangcong,å¨æ ,å¼åè,ä¸ªäººä¸»é¡µ,åå®¢",
     "favicon": "./static/img/favicon.ico"
   },
   "profile": {
@@ -10,21 +10,45 @@
     "avatar": "./static/img/logo.png",
     "avatarBorder": "./static/img/logokuang.png",
     "descriptions": [
-      "👦 <span class=\"purpleText\">Full Stack</span> Developer",
-      "📝 Stay hungry, stay foolish.",
-      "🚀 热爱开源，持续学习"
+      "ð¦ <span class=\"purpleText\">Full Stack</span> Developer",
+      "ð Stay hungry, stay foolish.",
+      "ð ç­ç±å¼æºï¼æç»­å­¦ä¹ "
     ]
   },
   "sidebar": {
     "location": "China",
     "school": "University",
-    "tags": ["全栈", "前端", "后端", "开源", "Linux", "跑步", "骑行", "摄影"],
+    "tags": [
+      "å¨æ ",
+      "åç«¯",
+      "åç«¯",
+      "å¼æº",
+      "Linux",
+      "è·æ­¥",
+      "éªè¡",
+      "æå½±"
+    ],
     "timeline": [
-      {"title": "持续精进中", "date": "2026"},
-      {"title": "成为全栈开发者", "date": "2025"},
-      {"title": "搭建个人主页", "date": "2025"},
-      {"title": "开始学习编程", "date": "2021"},
-      {"title": "进入大学", "date": "2020"}
+      {
+        "title": "æç»­ç²¾è¿ä¸­",
+        "date": "2026"
+      },
+      {
+        "title": "æä¸ºå¨æ å¼åè",
+        "date": "2025"
+      },
+      {
+        "title": "æ­å»ºä¸ªäººä¸»é¡µ",
+        "date": "2025"
+      },
+      {
+        "title": "å¼å§å­¦ä¹ ç¼ç¨",
+        "date": "2021"
+      },
+      {
+        "title": "è¿å¥å¤§å­¦",
+        "date": "2020"
+      }
     ]
   },
   "social": {
@@ -34,17 +58,37 @@
     "qqQr": "./static/img/qq.jpg"
   },
   "sites": [
-    {"title": "GitHub", "desc": "开源项目与代码", "url": "https://github.com/jiangcong2001", "img": "./static/img/i1.png"},
-    {"title": "博客", "desc": "技术文章与思考", "url": "#", "img": "./static/img/i2.png"}
+    {
+      "title": "GitHub",
+      "desc": "å¼æºé¡¹ç®ä¸ä»£ç ",
+      "url": "https://github.com/jiangcong2001",
+      "img": "./static/img/i1.png"
+    },
+    {
+      "title": "åå®¢",
+      "desc": "ææ¯æç« ä¸æè",
+      "url": "#",
+      "img": "./static/img/i2.png"
+    }
   ],
   "projects": [
-    {"title": "个人主页", "desc": "个人网站与导航", "url": "https://jiangcong2001.github.io/homepage/", "img": "./static/img/i4.png"},
-    {"title": "更多项目", "desc": "持续添加中...", "url": "#", "img": "./static/img/i5.png"}
+    {
+      "title": "ä¸ªäººä¸»é¡µ",
+      "desc": "ä¸ªäººç½ç«ä¸å¯¼èª",
+      "url": "https://jiangcong2001.github.io/homepage/",
+      "img": "./static/img/i4.png"
+    },
+    {
+      "title": "æ´å¤é¡¹ç®",
+      "desc": "æç»­æ·»å ä¸­...",
+      "url": "#",
+      "img": "./static/img/i5.png"
+    }
   ],
   "footer": {
     "text": "Jiangcong",
     "year": "2026",
-    "icp": "ICP备案号",
+    "icp": "ICPå¤æ¡å·",
     "icpUrl": "https://beian.miit.gov.cn/"
   },
   "admin": {

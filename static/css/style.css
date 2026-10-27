@@ -154,7 +154,7 @@ body {
     backdrop-filter:  blur(var(--back_filter));
     -webkit-backdrop-filter: blur(var(--back_filter));
     z-index: -99999999;
-   
+    
 }
 
 .zyyo-main {
@@ -488,6 +488,7 @@ body {
 .projectList {
     display: flex;
     flex-wrap: wrap;
+    gap: 12px;
 }
 
 .projectItem {
@@ -641,6 +642,18 @@ footer {
         display: none;
     }
 
+    .projectList {
+        gap: 10px;
+    }
+
+    .projectItem {
+        width: calc(50% - 12px);
+        margin: 0;
+        min-height: 104px;
+        padding: 12px;
+        height: auto;
+    }
+
     .a .projectItemRight {
         display: none;
 
@@ -657,8 +670,7 @@ footer {
 
     .a {
 
-        width: calc(50% - 18px);
-  margin: 9px;
+        width: calc(50% - 12px);
 
     }
 
@@ -688,7 +700,7 @@ footer {
 
     }
     .iconContainer {
-  
+   
      margin-top: 4vw;
 
 }
@@ -718,27 +730,13 @@ footer {
         display: none;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
 
 
 
 .tc {
     position: fixed;
-   
+    
     display: flex;
     visibility: hidden;
     width: 100vw;
@@ -785,9 +783,6 @@ footer {
     transform: translateY(0) scale(1);
 
 }
-
-
-
 
 
 
